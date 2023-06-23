@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script defer src="html.js"></script>
+  <script defer src="../teste.js"></script>
+  <link rel="stylesheet" href="mainPageCSS.css">
+</head>
+
+<body>
+  <form class="example" action="/action_page.php">
+    <input type="text" id="searchBar" placeholder="Search.." name="search2">
+    <button type="submit" id="searchButton"><i class="fa fa-search"></i></button>
+  </form>
+
+  <div class="flex-container" id="evolutionTreeContainer"></div> 
+  <p style="text-align: center; color: blue; font-size: 30px;">Or you can search by types!</p>
+  <div class="flex-container" id="typeButtonsContainer"></div>
+  
+ <script>
+  
+    document.addEventListener('DOMContentLoaded', async function(){
+      let typeButtonsParagraph = await generateTypeButtons()
+      document.getElementById('typeButtonsContainer').append(typeButtonsParagraph)
+    })
+    const searchButton = document.querySelector('#searchButton');
+    searchButton.addEventListener('click', async function(event) {
+    event.preventDefault()
+    document.querySelector('#evolutionTreeContainer').innerHTML = '';
+    document.getElementById('evolutionTreeContainer').style.display = "flex"
+    let searchBar = document.querySelector('#searchBar');
+    let searchText = searchBar.value;
+    let evolutionTree = await evolutionTreeBuilder(searchText);
+
+    for(i = 0; i < evolutionTree.length; i++){
+    tester = false
+    if(i < (evolutionTree.length - 1)){
+      tester = true
+    }
+    generateEvolutionColumn(evolutionTree[i], tester)
+  }
+  });
+ </script>
+
+</body>
+</html> 

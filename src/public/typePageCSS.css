@@ -1,0 +1,178 @@
+#pokemonType-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .pokemonCard {
+    height: 55vh;
+    width: calc((100% / 6) - 16px);
+    margin: 8px;
+    border-radius: 3px;
+    transition: all 200ms ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* .pokemonButton>img{
+    height:  95%;
+    width: 95%;
+    background: none;
+  } */
+
+  .pokemonButton{
+    position: relative;
+    overflow: hidden;
+    width: 80%;
+    aspect-ratio: 1/1;
+    margin-top: 5px;
+    background-color: orange;
+    border: none;
+    outline:none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pokemonButton::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 95%;
+    height: 95%;
+    background-size: cover;
+    z-index: -1;
+  }
+
+  .pokemonCard:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .pokemonCard-actions {
+    margin: 8px;
+    padding: 16px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #loader {
+    display: flex;
+  }
+  
+  .skeleton-card {
+    height: 55vh;
+    width: calc((100% / 6) - 16px);
+    margin: 8px;
+    border-radius: 3px;
+    transition: all 200ms ease-in-out;
+    position: relative;
+    background-color: #eaeaea;
+  }
+  
+  .skeleton-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0));
+    animation: load 1s infinite;
+  }
+  
+  @keyframes load {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  .modal {
+    display:block;
+    position: fixed; 
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.368);
+  }
+
+  .modal-content {
+    background-color: rgb(51, 0, 255);
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    align-items: center;
+    width: 80%; 
+    position: relative;
+    display: flex; /* add display flex */
+    flex-direction: line; /* add flex direction */
+    justify-content: center; /* add justify content */ 
+  }
+
+  
+#areaEncountersListDiv{
+  line-height: 0%;
+}
+
+#areaEncountersListDiv p {
+  text-align: left;
+}
+
+.close-button {
+  color: #aaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 20px;
+  align-self: center; /* add align-self */
+}
+
+.modal-content p {
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+}
+
+.typeButton {
+  margin: 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: orange;
+  color: blue;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.typeButton {
+  background-color: darkorange;
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="html.js"></script>
+    <script defer src="../teste.js"></script>
+    <link rel="stylesheet" href="typePageCSS.css">
+    <script>
+      window.addEventListener("load", async function() {
+      let type = JSON.parse(sessionStorage.getItem('type'));
+      let thisTypePokemons = await typePageInfoProvider(type)
+      console.log(type)
+      sessionStorage.setItem("thisTypePokemons", JSON.stringify(thisTypePokemons));
+      })
+    </script>
+  </head>
+<body>
+  
+  <div id="pokemonType-container"></div>
+  <div id="loader">
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+  </div>
+  <div class="card-actions">
+    <span>Showing 
+      <span id="pokemonType-count"></span> of 
+      <span id="pokemonType-total"></span> cards      
+    </span>
+  </div>
+
+<script>
+  async function pageInitialization(){
+  const thisTypePokemons = await JSON.parse(sessionStorage.getItem('thisTypePokemons'))
+  const pokemonTypeContainer = document.getElementById("pokemonType-container");
+  const pokemonTypeCountElem = document.getElementById("pokemonType-count");
+  const pokemonTypeTotalElem = document.getElementById("pokemonType-total");
+  const loader = document.getElementById("loader");
+  const pokemonTypeCountLimit = thisTypePokemons.length;
+  pokemonTypeTotalElem.innerHTML = pokemonTypeCountLimit;
+  const countIncrease = 12;
+  const pageCount = Math.ceil(pokemonTypeCountLimit / countIncrease);
+  let currentPage = 1;
+  console.log(thisTypePokemons)
+
+  async function createPokemonCard(index) {
+    const pokemonCard = document.createElement("div");
+    pokemonCard.className = "pokemonCard";
+
+    let pokemonCardInfo = document.createElement("div")
+    pokemonCardInfo.innerHTML = thisTypePokemons[index - 1][0][0] + " " + thisTypePokemons[index - 1][0][1];
+
+    let pokemonCardButton = document.createElement("button")
+    pokemonCardButton.className = "pokemonButton"
+    pokemonCardButton.id = thisTypePokemons[index - 1][0][0]
+    console.log(pokemonCardButton)
+
+    let pokemonCardImage = new Image();
+    pokemonCardImage.src = thisTypePokemons[index - 1][2];
+    pokemonCardImage.addEventListener("load", function() {
+      let imageAspectRatio = pokemonCardImage.width / pokemonCardImage.height;
+      let buttonAspectRatio = pokemonCardButton.offsetWidth / pokemonCardButton.offsetHeight;
+
+      if (imageAspectRatio > buttonAspectRatio) {
+        pokemonCardButton.style.backgroundSize = "auto 100%";
+      } else {
+        pokemonCardButton.style.backgroundSize = "100% auto";
+      }
+
+    pokemonCardButton.style.backgroundImage = `url(${pokemonCardImage.src})`;
+    });
+
+    pokemonCard.style.backgroundColor = "orange";
+    
+    let typesParagraph = document.createElement("p");
+    for (let i = 0; i < thisTypePokemons[index - 1][1].length; i++) {
+      const typeButton = document.createElement('button');
+      typeButton.className = "typeButton"
+      typeButton.textContent = thisTypePokemons[index - 1][1][i];
+      typeButton.innerHTML = thisTypePokemons[index - 1][1][i] //verificar outro atributo
+      typesParagraph.appendChild(typeButton);
+    }
+    
+    pokemonCard.appendChild(pokemonCardInfo)
+    pokemonCard.appendChild(pokemonCardButton)
+    pokemonCard.appendChild(typesParagraph)
+
+    pokemonTypeContainer.appendChild(pokemonCard)
+  };
+
+  function addCards(pageIndex) {
+    currentPage = pageIndex;
+    const startRange = (pageIndex - 1) * countIncrease;
+    const endRange = currentPage == pageCount ? pokemonTypeCountLimit : pageIndex * countIncrease;
+    pokemonTypeCountElem.innerHTML = endRange;
+    for (let i = startRange + 1; i <= endRange; i++) {
+      createPokemonCard(i);
+    }
+  };
+
+  window.onload = function () {
+  addCards(currentPage);
+  };
+
+  function handleInfiniteScroll() {
+    throttle(() => {
+      const endOfPage = window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+      if (endOfPage) {
+        addCards(currentPage + 1);
+      }
+      if (currentPage === pageCount) {
+      removeInfiniteScroll();
+      }
+    }, 1000);
+  };
+
+  window.addEventListener("scroll", handleInfiniteScroll);
+
+  var throttleTimer;
+  function throttle(callback, time) {
+    if (throttleTimer) return;
+    throttleTimer = true;
+    setTimeout(() => {
+      callback();
+      throttleTimer = false;
+    }, time);
+  }
+
+  function removeInfiniteScroll() {
+    loader.remove();
+    window.removeEventListener("scroll", handleInfiniteScroll);
+  };
+}
+  async function initializePage() {
+    await pageInitialization();
+  }
+  initializePage();
+</script>
+</body>
+</html>

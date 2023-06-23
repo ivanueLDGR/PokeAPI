@@ -1,0 +1,202 @@
+* {
+  box-sizing: border-box;
+}
+
+form input[type=text] {
+  padding: 40px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form button {
+  float: left;
+  margin:auto;
+  width: 20%;
+  max-width:60px;
+  padding: 40px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form button:hover {
+  background: #0b7dda;
+}
+
+form::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+body {
+    background-color: lightblue;
+}
+
+h1 {
+    color: navy;
+    margin-left: 20px;
+}
+
+#evolutionTreeContainer {
+  width: 100%;
+  max-width: 800px;
+  min-width: 500px;
+  height: 100%;
+  min-height: 100px;
+  max-height: 450px;
+  top: 50%;
+  bottom: 50%;
+  margin: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+  align-items: stretch;
+  justify-content: center;
+  background-color: rgb(30, 255, 143);
+}
+
+.evolutionTreeColumn{
+  width: 100%;
+  max-height: 450px;
+  flex: 1;
+  display: flex;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-wrap: wrap;
+  flex-direction: column
+}
+
+#evolutionTreeContainer >.evolutionTreeColumn>.arrow {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #007bff;
+  margin-top: -10px;
+}
+
+#evolutionTreeContainer>div>Button {
+  width: 100%;
+  max-width: 130px;
+  aspect-ratio: 1 / 1;
+  margin-top: 5px;
+  background-color: orange;
+  border-radius: 50%;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+/* #evolutionTreeContainer>Button>img {
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  align-items: center;
+} */
+
+.modal {
+  display:block;
+  position: fixed; 
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+  overflow: auto;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.368);
+}
+
+.modal-content {
+  background-color: rgb(51, 0, 255);
+  margin: 15% auto; 
+  padding: 20px;
+  border: 1px solid #888;
+  align-items: center;
+  width: 80%; 
+  position: relative;
+  display: flex; /* add display flex */
+  flex-direction: line; /* add flex direction */
+  justify-content: center; /* add justify content */ 
+}
+
+#areaEncountersListDiv{
+  line-height: 0%;
+}
+
+#areaEncountersListDiv p {
+  text-align: left;
+}
+
+.close-button {
+  color: #aaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 20px;
+  align-self: center; /* add align-self */
+}
+
+.modal-content p {
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+}
+
+#typeButtonsContainer p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.typeButton {
+  margin: 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: orange;
+  color: blue;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.typeButton {
+  background-color: darkorange;
+}
